@@ -1,4 +1,10 @@
 #!/usr/bin/python3
+import sys
+import os
+
+# Add the project root directory to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
