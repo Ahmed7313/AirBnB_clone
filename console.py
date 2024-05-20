@@ -163,6 +163,8 @@ class HBNBCommand(cmd.Cmd):
                 self.do_count(cls_name)
             elif command == "show":
                 self.do_show(f"{cls_name} {args}")
+            elif command == "destroy":
+                self.do_destroy(f"{cls_name} {args}")
             else:
                 print("*** Unknown syntax: {}".format(line))
         except ValueError:
