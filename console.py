@@ -34,10 +34,18 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program"""
         return True
 
+    def help_quit(self):
+        """Help information for quit command"""
+        print("Quit command to exit the program")
+
     def do_EOF(self, arg):
         """EOF command to exit the program"""
         print()  # To ensure the prompt goes to a new line
         return True
+
+    def help_EOF(self):
+        """Help information for EOF command"""
+        print("EOF command to exit the program")
 
     def emptyline(self):
         """Do nothing on empty input line"""
@@ -119,16 +127,6 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
             return
         obj = storage.all()[key]
-        if len(args) == 3:
-            try:
-                updates = json.loads(args[2].replace("'", "\""))
-                if isinstance(updates, dict):
-                    for k, v in updates.items():
-                        setattr(obj, k, v)
-                    obj.save()
-                    return
-            except json.JSONDecodeError:
-                pass
         if len(args) < 3:
             print("** attribute name missing **")
             return
