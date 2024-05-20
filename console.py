@@ -3,6 +3,7 @@
 Entry point for the command interpreter
 """
 import cmd
+import json
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -117,13 +118,23 @@ class HBNBCommand(cmd.Cmd):
         if key not in storage.all():
             print("** no instance found **")
             return
+        obj = storage.all()[key]
+        if len(args) == 3:
+            try:
+                updates = json.loads(args[2].replace("'", "\""))
+                if isinstance(updates, dict):
+                    for k, v in updates.items():
+                        setattr(obj, k, v)
+                    obj.save()
+                    return
+            except json.JSONDecodeError:
+                pass
         if len(args) < 3:
             print("** attribute name missing **")
             return
         if len(args) < 4:
             print("** value missing **")
             return
-        obj = storage.all()[key]
         attr_name = args[2]
         attr_value = args[3].strip('"')
         if hasattr(obj, attr_name):
@@ -166,16 +177,24 @@ class HBNBCommand(cmd.Cmd):
             elif command == "destroy":
                 self.do_destroy("{} {}".format(cls_name, args.strip('"')))
             elif command == "update":
-                attr_args = args.split(", ")
-                if len(attr_args) == 3:
-                    self.do_update("{} {} {} {}".format(
+                attr_args = args.split(", ", 1)
+                if len(attr_args) == 2 and attr_args[1].startswith("{"):
+                    self.do_update("{} {} {}".format(
                         cls_name,
                         attr_args[0].strip('"'),
-                        attr_args[1].strip('"'),
-                        attr_args[2].strip('"')
+                        attr_args[1]
                     ))
                 else:
-                    print("*** Unknown syntax: {}".format(line))
+                    attr_args = args.split(", ")
+                    if len(attr_args) == 3:
+                        self.do_update("{} {} {} {}".format(
+                            cls_name,
+                            attr_args[0].strip('"'),
+                            attr_args[1].strip('"'),
+                            attr_args[2].strip('"')
+                        ))
+                    else:
+                        print("*** Unknown syntax: {}".format(line))
             else:
                 print("*** Unknown syntax: {}".format(line))
         except ValueError:
