@@ -162,11 +162,20 @@ class HBNBCommand(cmd.Cmd):
             elif command == "count":
                 self.do_count(cls_name)
             elif command == "show":
-                self.do_show(f"{cls_name} {args.strip('\"')}")
+                self.do_show("{} {}".format(cls_name, args.strip('"')))
             elif command == "destroy":
-                self.do_destroy(f"{cls_name} {args.strip('\"')}")
+                self.do_destroy("{} {}".format(cls_name, args.strip('"')))
             elif command == "update":
-                self.do_update(f"{cls_name} {args.replace(', ', ' ')}")
+                attr_args = args.split(", ")
+                if len(attr_args) == 3:
+                    self.do_update("{} {} {} {}".format(
+                        cls_name,
+                        attr_args[0].strip('"'),
+                        attr_args[1].strip('"'),
+                        attr_args[2].strip('"')
+                    ))
+                else:
+                    print("*** Unknown syntax: {}".format(line))
             else:
                 print("*** Unknown syntax: {}".format(line))
         except ValueError:
