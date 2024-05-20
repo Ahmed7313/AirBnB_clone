@@ -1,15 +1,44 @@
 #!/usr/bin/python3
-from models import storage
+"""
+Unittests for FileStorage class
+"""
+import unittest
+from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+import os
+import json
 
-all_objs = storage.all()
-print("-- Reloaded objects --")
-for obj_id, obj in all_objs.items():
-    print(obj)
 
-print("-- Create a new object --")
-my_model = BaseModel()
-my_model.name = "My_First_Model"
-my_model.my_number = 89
-my_model.save()
-print(my_model)
+class TestFileStorage(unittest.TestCase):
+    def setUp(self):
+        self.storage = FileStorage()
+        self.model = BaseModel()
+
+    def test_save(self):
+        self.storage.new(self.model)
+        self.storage.save()
+        self.assertTrue(os.path.exists('file.json'))
+
+    def test_reload(self):
+        self.storage.new(self.model)
+        self.storage.save()
+        self.storage.reload()
+        all_objs = self.storage.all()
+        key = "{}.{}".format(self.model.__class__.__name__, self.model.id)
+        self.assertIn(key, all_objs)
+        self.assertEqual(all_objs[key].id, self.model.id)
+
+    def test_all(self):
+        self.storage.new(self.model)
+        all_objs = self.storage.all()
+        key = "{}.{}".format(self.model.__class__.__name__, self.model.id)
+        self.assertIn(key, all_objs)
+
+    def test_new(self):
+        key = "{}.{}".format(self.model.__class__.__name__, self.model.id)
+        self.storage.new(self.model)
+        self.assertIn(key, self.storage.all())
+
+
+if __name__ == "__main__":
+    unittest.main()
