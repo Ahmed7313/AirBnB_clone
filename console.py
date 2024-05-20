@@ -145,6 +145,24 @@ class HBNBCommand(cmd.Cmd):
         else:
             cmd.Cmd.do_help(self, arg)
 
+    def default(self, line):
+        """Handle commands in the form <class name>.action()"""
+        if '.' not in line:
+            print("*** Unknown syntax: {}".format(line))
+            return
+        try:
+            cls_name, command = line.split('.')
+            command = command.strip('()')
+            if cls_name not in self.classes:
+                print("** class doesn't exist **")
+                return
+            if command == "all":
+                self.do_all(cls_name)
+            else:
+                print("*** Unknown syntax: {}".format(line))
+        except ValueError:
+            print("*** Unknown syntax: {}".format(line))
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
