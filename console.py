@@ -158,10 +158,17 @@ class HBNBCommand(cmd.Cmd):
                 return
             if command == "all":
                 self.do_all(cls_name)
+            elif command == "count":
+                self.do_count(cls_name)
             else:
                 print("*** Unknown syntax: {}".format(line))
         except ValueError:
             print("*** Unknown syntax: {}".format(line))
+
+    def do_count(self, cls_name):
+        """Retrieve the number of instances of a class"""
+        count = sum(1 for obj in storage.all().values() if type(obj).__name__ == cls_name)
+        print(count)
 
 
 if __name__ == '__main__':
