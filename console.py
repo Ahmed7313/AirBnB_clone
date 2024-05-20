@@ -153,7 +153,7 @@ class HBNBCommand(cmd.Cmd):
         try:
             cls_name, command = line.split('.')
             command, args = command.split('(')
-            args = args.rstrip(')').strip('"')
+            args = args.rstrip(')')
             if cls_name not in self.classes:
                 print("** class doesn't exist **")
                 return
@@ -162,9 +162,11 @@ class HBNBCommand(cmd.Cmd):
             elif command == "count":
                 self.do_count(cls_name)
             elif command == "show":
-                self.do_show(f"{cls_name} {args}")
+                self.do_show(f"{cls_name} {args.strip('\"')}")
             elif command == "destroy":
-                self.do_destroy(f"{cls_name} {args}")
+                self.do_destroy(f"{cls_name} {args.strip('\"')}")
+            elif command == "update":
+                self.do_update(f"{cls_name} {args.replace(', ', ' ')}")
             else:
                 print("*** Unknown syntax: {}".format(line))
         except ValueError:
