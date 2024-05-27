@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirBnB Clone</title>
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="styles/103-common.css">
+    <link rel="stylesheet" href="styles/103-header.css">
+    <link rel="stylesheet" href="styles/103-footer.css">
+    <link rel="stylesheet" href="styles/103-filters.css">
+    <link rel="stylesheet" href="styles/103-places.css">
+</head>
+<body>
+    <header>
+        <div class="logo" aria-label="Company logo"></div>
+    </header>
+    <main>
+        <div class="container">
+            <section class="filters" aria-label="Filter options">
+                <div class="locations" aria-labelledby="locations-title">
+                    <h2 id="locations-title">States</h2>
+                    <h3>California, Arizona...</h3>
+                    <ul class="popover">
+                        <li>
+                            <h4>Arizona</h4>
+                            <ul>
+                                <li>Page</li>
+                                <li>Page2</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4>California</h4>
+                            <ul>
+                                <li>San Francisco</li>
+                                <li>Los Altos</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="amenities" aria-labelledby="amenities-title">
+                    <h2 id="amenities-title">Amenities</h2>
+                    <h3>Internet, Kitchen...</h3>
+                    <ul class="popover">
+                        <li>Internet</li>
+                        <li>TV</li>
+                        <li>Kitchen</li>
+                        <li>Iron</li>
+                    </ul>
+                </div>
+                <button>Search</button>
+            </section>
+            <section class="places" aria-label="List of places">
+                <h1>Places</h1>
+                <div class="places-container">
+                    <article aria-labelledby="place1-title">
+                        <h2 id="place1-title">My home</h2>
+                        <div class="price_by_night" aria-label="Price per night">$80</div>
+                        <div class="information" aria-label="Information about the place">
+                            <div class="max_guest" aria-label="Maximum guests">2 Guests</div>
+                            <div class="number_rooms" aria-label="Number of bedrooms">1 Bedroom</div>
+                            <div class="number_bathrooms" aria-label="Number of bathrooms">1 Bathroom</div>
+                        </div>
+                        <div class="user" aria-label="Owner">Owner: <strong>John Lennon</strong></div>
+                        <div class="description" aria-label="Description">
+                            This is a lovely 1 bedroom and 1 bathroom apartment that can accommodate 2 people. It is located at the center of Shanghai and next to subway line 1. 1 stop to People Square, 2 stops to Bund, 3 stops to Jingan Temple.
+                        </div>
+                        <div class="amenities" aria-labelledby="place1-amenities-title">
+                            <h3 id="place1-amenities-title">Amenities</h3>
+                            <ul>
+                                <li>Pet friendly</li>
+                                <li>TV</li>
+                                <li>Wifi</li>
+                            </ul>
+                        </div>
+                        <div class="reviews" aria-labelledby="place1-reviews-title">
+                            <h3 id="place1-reviews-title">Reviews</h3>
+                            <ul>
+                                <li>
+                                    <h4>From Bob Dylan the 27th January 2017</h4>
+                                    <p>This place was fantastic! Highly recommend it to anyone visiting the area.</p>
+                                </li>
+                                <li>
+                                    <h4>From John Doe the 5th February 2019</h4>
+                                    <p>Great location and very comfortable stay. Will come back again.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                    <!-- Add more article elements as needed -->
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>Best School</p>
+        <a href="https://twitter.com/intent/tweet?text=Well%20done%20on%20completing%20this%20project!%20Let%20the%20world%20hear%20about%20this%20milestone%20achieved." target="_blank">Click here to tweet!</a>
+    </footer>
+</body>
+</html>
+
